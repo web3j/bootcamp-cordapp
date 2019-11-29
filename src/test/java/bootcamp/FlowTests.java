@@ -1,17 +1,21 @@
-package java_bootcamp;
+package bootcamp;
 
-import com.google.common.collect.ImmutableList;
 import net.corda.core.concurrent.CordaFuture;
 import net.corda.core.contracts.Command;
 import net.corda.core.contracts.TransactionState;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.testing.node.MockNetwork;
+import net.corda.testing.node.MockNetworkParameters;
 import net.corda.testing.node.StartedMockNode;
+import net.corda.testing.node.TestCordapp;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.junit.Assert.*;
 
 public class FlowTests {
     private MockNetwork network;
@@ -20,7 +24,11 @@ public class FlowTests {
 
     @Before
     public void setup() {
-        network = new MockNetwork(ImmutableList.of("java_bootcamp"));
+        network = new MockNetwork(
+                new MockNetworkParameters(
+                        Collections.singletonList(TestCordapp.findCordapp("bootcamp"))
+                )
+        );
         nodeA = network.createPartyNode(null);
         nodeB = network.createPartyNode(null);
         network.runNetwork();
@@ -33,7 +41,7 @@ public class FlowTests {
 
 //    @Test
 //    public void transactionConstructedByFlowUsesTheCorrectNotary() throws Exception {
-//        TokenIssueFlow flow = new TokenIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
+//        TokenIssueFlowInitiator flow = new TokenIssueFlowInitiator(nodeB.getInfo().getLegalIdentities().get(0), 99);
 //        CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
 //        network.runNetwork();
 //        SignedTransaction signedTransaction = future.get();
@@ -43,10 +51,10 @@ public class FlowTests {
 //
 //        assertEquals(network.getNotaryNodes().get(0).getInfo().getLegalIdentities().get(0), output.getNotary());
 //    }
-
+//
 //    @Test
 //    public void transactionConstructedByFlowHasOneTokenStateOutputWithTheCorrectAmountAndOwner() throws Exception {
-//        TokenIssueFlow flow = new TokenIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
+//        TokenIssueFlowInitiator flow = new TokenIssueFlowInitiator(nodeB.getInfo().getLegalIdentities().get(0), 99);
 //        CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
 //        network.runNetwork();
 //        SignedTransaction signedTransaction = future.get();
@@ -57,10 +65,10 @@ public class FlowTests {
 //        assertEquals(nodeB.getInfo().getLegalIdentities().get(0), output.getOwner());
 //        assertEquals(99, output.getAmount());
 //    }
-
+//
 //    @Test
 //    public void transactionConstructedByFlowHasOneOutputUsingTheCorrectContract() throws Exception {
-//        TokenIssueFlow flow = new TokenIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
+//        TokenIssueFlowInitiator flow = new TokenIssueFlowInitiator(nodeB.getInfo().getLegalIdentities().get(0), 99);
 //        CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
 //        network.runNetwork();
 //        SignedTransaction signedTransaction = future.get();
@@ -68,12 +76,12 @@ public class FlowTests {
 //        assertEquals(1, signedTransaction.getTx().getOutputStates().size());
 //        TransactionState output = signedTransaction.getTx().getOutputs().get(0);
 //
-//        assertEquals("java_bootcamp.TokenContract", output.getContract());
+//        assertEquals("bootcamp.TokenContract", output.getContract());
 //    }
-
+//
 //    @Test
 //    public void transactionConstructedByFlowHasOneIssueCommand() throws Exception {
-//        TokenIssueFlow flow = new TokenIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
+//        TokenIssueFlowInitiator flow = new TokenIssueFlowInitiator(nodeB.getInfo().getLegalIdentities().get(0), 99);
 //        CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
 //        network.runNetwork();
 //        SignedTransaction signedTransaction = future.get();
@@ -81,12 +89,12 @@ public class FlowTests {
 //        assertEquals(1, signedTransaction.getTx().getCommands().size());
 //        Command command = signedTransaction.getTx().getCommands().get(0);
 //
-//        assert(command.getValue() instanceof TokenContract.Commands.Issue);
+//        assert (command.getValue() instanceof TokenContract.Commands.Issue);
 //    }
-
+//
 //    @Test
-//    public void transactionConstructedByFlowHasOneCommandWithTheIssueAsASigner() throws Exception {
-//        TokenIssueFlow flow = new TokenIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
+//    public void transactionConstructedByFlowHasOneCommandWithTheIssuerAndTheOwnerAsASigners() throws Exception {
+//        TokenIssueFlowInitiator flow = new TokenIssueFlowInitiator(nodeB.getInfo().getLegalIdentities().get(0), 99);
 //        CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
 //        network.runNetwork();
 //        SignedTransaction signedTransaction = future.get();
@@ -94,13 +102,14 @@ public class FlowTests {
 //        assertEquals(1, signedTransaction.getTx().getCommands().size());
 //        Command command = signedTransaction.getTx().getCommands().get(0);
 //
-//        assertEquals(1, command.getSigners().size());
-//        assert(command.getSigners().contains(nodeA.getInfo().getLegalIdentities().get(0).getOwningKey()));
+//        assertEquals(2, command.getSigners().size());
+//        assertTrue(command.getSigners().contains(nodeA.getInfo().getLegalIdentities().get(0).getOwningKey()));
+//        assertTrue(command.getSigners().contains(nodeB.getInfo().getLegalIdentities().get(0).getOwningKey()));
 //    }
-
+//
 //    @Test
 //    public void transactionConstructedByFlowHasNoInputsAttachmentsOrTimeWindows() throws Exception {
-//        TokenIssueFlow flow = new TokenIssueFlow(nodeB.getInfo().getLegalIdentities().get(0), 99);
+//        TokenIssueFlowInitiator flow = new TokenIssueFlowInitiator(nodeB.getInfo().getLegalIdentities().get(0), 99);
 //        CordaFuture<SignedTransaction> future = nodeA.startFlow(flow);
 //        network.runNetwork();
 //        SignedTransaction signedTransaction = future.get();
@@ -108,6 +117,6 @@ public class FlowTests {
 //        assertEquals(0, signedTransaction.getTx().getInputs().size());
 //        // The single attachment is the contract attachment.
 //        assertEquals(1, signedTransaction.getTx().getAttachments().size());
-//        assertEquals(null, signedTransaction.getTx().getTimeWindow());
+//        assertNull(signedTransaction.getTx().getTimeWindow());
 //    }
 }

@@ -8,11 +8,11 @@ This project is the template we will use as a basis for developing a complete Co
 during today's bootcamp. Our CorDapp will allow the issuance of tokens onto the ledger.
 
 We'll develop the CorDapp using a test-driven approach. At each stage, you'll know your 
-CorDapp is working once it passes both sets of tests defined in `src/test/java/java_bootcamp`.
+CorDapp is working once it passes both sets of tests defined in `src/test/java/bootcamp`.
 
 ## Set up
 
-1. Download and install Oracle JDK 8 JVM (minimum supported version 8u131)
+1. Download and install a JDK 8 JVM (minimum supported version 8u131)
 2. Download and install IntelliJ Community Edition (supported versions 2017.x and 2018.x)
 3. Download the bootcamp-cordapp repository:
 
@@ -150,8 +150,8 @@ Once you've finished the CorDapp's code, run it with the following steps:
 * Build a test network of nodes by opening a terminal window at the root of
   your project and running the following command:
 
-    * Windows:   `gradlew.bat deployNodesJava`
-    * macOS:     `./gradlew deployNodesJava`
+    * Windows:   `gradlew.bat deployNodes`
+    * macOS:     `./gradlew deployNodes`
 
 * Start the nodes by running the following command:
 
@@ -166,14 +166,4 @@ Once you've finished the CorDapp's code, run it with the following steps:
 * You can now see the tokens in the vaults of Party A and Party B (but not 
   Party C!) by running the following command in their respective terminals:
 
-    `run vaultQuery contractStateType: java_bootcamp.TokenState`
-
-## Updating for offline use
-
-* Run the `gatherDependencies` Gradle task from the root of the project to 
-  gather all the CorDapp's dependencies in `lib/dependencies`
-* Update `gradle/wrapper/gradle-wrapper.properties` to point to a local Gradle 
-  distribution (e.g. 
-  `distributionUrl=gradle-4.4.1-all.zip`)
-* In `build.gradle`, under both `repositories` blocks, comment out any 
-  repositories other than `flatDir { ... }`
+    `run vaultQuery contractStateType: bootcamp.TokenState`
