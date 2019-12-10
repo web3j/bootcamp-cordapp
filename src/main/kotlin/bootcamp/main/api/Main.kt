@@ -1,29 +1,26 @@
-package bootcamp.web3j.bootcamp.cordapp.api
+package bootcamp.main.api
 
-import generated.bootcamp.TokenIssueFlowInitiatorPayload
-import generated.examples.ArtTransferFlowInitiatorPayload
+import org.web3j.corda.api.CorDapp
+import org.web3j.corda.api.Flow
+import org.web3j.corda.dapps.LifeCycle
+import org.web3j.corda.protocol.ClientBuilder
+import org.web3j.corda.protocol.CordaException
+import org.web3j.corda.protocol.CordaService
 import javax.annotation.Generated
 import javax.ws.rs.Consumes
 import javax.ws.rs.POST
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
-import org.web3j.corda.api.CorDapp
-import org.web3j.corda.api.Flow
-import org.web3j.corda.dapps.LifeCycle
-import org.web3j.corda.model.core.transactions.SignedTransaction
-import org.web3j.corda.protocol.ClientBuilder
-import org.web3j.corda.protocol.CordaException
-import org.web3j.corda.protocol.CordaService
 
 /**
  *  CorDapp wrapper.
  */
 @Generated(
     value = ["org.web3j.corda.codegen.CorDappClientGenerator"],
-    date = "2019-11-27T18:38:08.558Z"
+    date = "2019-12-10T14:50:58.71Z"
 )
-@Path("/api/rest/cordapps/bootcamp-cordapp/")
-interface BootcampCordapp : CorDapp {
+@Path("/api/rest/cordapps/main/")
+interface Main : CorDapp {
 
     @get:Path("flows")
     override val flows: FlowResource
@@ -37,7 +34,7 @@ interface BootcampCordapp : CorDapp {
         val tokenIssueFlowInitiator: TokenIssueFlowInitiator
 
         /**
-         * BootcampCordapp TokenIssueFlowInitiator flow.
+         * Main TokenIssueFlowInitiator flow.
          */
         interface TokenIssueFlowInitiator : Flow {
 
@@ -57,7 +54,7 @@ interface BootcampCordapp : CorDapp {
         val artTransferFlowInitiator: ArtTransferFlowInitiator
 
         /**
-         * BootcampCordapp ArtTransferFlowInitiator flow.
+         * Main ArtTransferFlowInitiator flow.
          */
         interface ArtTransferFlowInitiator : Flow {
 
@@ -71,15 +68,15 @@ interface BootcampCordapp : CorDapp {
     }
 
     /**
-     * BootcampCordapp CorDapp lifecycle methods.
+     * Main CorDapp lifecycle methods.
      */
-    companion object : LifeCycle<BootcampCordapp> {
+    companion object : LifeCycle<Main> {
 
         /**
-         * Loads an existing BootcampCordapp CorDapp instance.
+         * Loads an existing Main CorDapp instance.
          */
         override fun load(service: CordaService) = ClientBuilder.build(
-            BootcampCordapp::class.java, service, CordaException.Companion::of
+            Main::class.java, service, CordaException.Companion::of
         )
     }
 }

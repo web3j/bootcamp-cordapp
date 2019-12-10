@@ -1,4 +1,4 @@
-package examples
+package generated.examples
 
 import javax.annotation.Generated
 import org.web3j.corda.model.core.identity.AbstractParty
@@ -14,7 +14,7 @@ import org.web3j.corda.model.core.identity.Party
 */
 @Generated(
     value = ["org.web3j.corda.codegen.CorDappClientGenerator"],
-    date = "2019-11-27T18:38:08.497Z"
+    date = "2019-12-10T14:50:58.645Z"
 )
 data class ArtState(
     val artist: kotlin.String? = null,
