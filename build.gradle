@@ -47,10 +47,10 @@ dependencies {
     testCompile "$corda_release_group:corda-node-driver:$corda_release_version"
     testCompile "$corda_release_group:corda-test-utils:$corda_release_version"
 
-    implementation "org.web3j.corda:web3j-corda-core:0.2.4"
-    implementation "org.web3j.corda:web3j-corda-console:0.2.4"
+    implementation "org.web3j.corda:web3j-corda-core:0.2.5"
+    implementation "org.web3j.corda:web3j-corda-console:0.2.5"
 
-    testImplementation "org.web3j.corda:web3j-corda-test:0.2.4"
+    testImplementation "org.web3j.corda:web3j-corda-test:0.2.5"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.4.2"
     testImplementation "org.testcontainers:testcontainers:1.12.3"
     testImplementation "io.swagger.core.v3:swagger-core:2.0.9"
