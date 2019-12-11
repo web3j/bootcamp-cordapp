@@ -15,7 +15,7 @@ import javax.annotation.Generated
 class MainTest {
 
     private val network = network {
-        directory = File(System.getProperty("user.dir")).parentFile
+        directory = File(System.getProperty("user.dir"))
         nodes {
             notary {
                 name = "O=Notary, L=London, C=GB"
