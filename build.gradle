@@ -4,6 +4,7 @@ buildscript {
     ext.corda_gradle_plugins_version = '4.0.43'
     ext.junit_version = '4.12'
     ext.quasar_version = '0.7.10'
+    ext.web3j_corda_version = '0.2.7'
 
     repositories {
         mavenCentral()
@@ -17,12 +18,11 @@ buildscript {
         classpath "net.corda.plugins:cordapp:$corda_gradle_plugins_version"
         classpath "net.corda.plugins:cordformation:$corda_gradle_plugins_version"
         classpath "net.corda.plugins:quasar-utils:$corda_gradle_plugins_version"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61'
     }
 }
 
 repositories {
-    mavenLocal()
     jcenter()
     mavenCentral()
     maven { url 'https://jitpack.io' }
@@ -47,10 +47,10 @@ dependencies {
     testCompile "$corda_release_group:corda-node-driver:$corda_release_version"
     testCompile "$corda_release_group:corda-test-utils:$corda_release_version"
 
-    implementation "org.web3j.corda:web3j-corda-core:0.2.5"
-    implementation "org.web3j.corda:web3j-corda-console:0.2.5"
+    implementation "org.web3j.corda:web3j-corda-core:$web3j_corda_version"
+    implementation "org.web3j.corda:web3j-corda-console:$web3j_corda_version"
 
-    testImplementation "org.web3j.corda:web3j-corda-test:0.2.5"
+    testImplementation "org.web3j.corda:web3j-corda-test:$web3j_corda_version"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.4.2"
     testImplementation "org.testcontainers:testcontainers:1.12.3"
     testImplementation "io.swagger.core.v3:swagger-core:2.0.9"
