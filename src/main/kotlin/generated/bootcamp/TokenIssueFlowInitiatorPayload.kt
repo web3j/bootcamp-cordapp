@@ -5,14 +5,14 @@ import org.web3j.corda.model.core.identity.Party
 
 /**
 *
-* @param owner
 * @param amount
+* @param owner
 */
 @Generated(
     value = ["org.web3j.corda.codegen.CorDappClientGenerator"],
-    date = "2019-12-10T14:50:58.639Z"
+    date = "2019-12-13T11:30:04.601Z"
 )
 data class TokenIssueFlowInitiatorPayload(
-    val owner: org.web3j.corda.model.core.identity.Party,
-    val amount: kotlin.Int
+    val amount: kotlin.Int,
+    val owner: org.web3j.corda.model.core.identity.Party? = null
 )

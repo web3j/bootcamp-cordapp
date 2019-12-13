@@ -34,7 +34,7 @@ class MainTest {
     @Test
     fun `start the TokenIssueFlowInitiator flow`() {
         val generatedBootcampTokenIssueFlowInitiatorPayload = generated.bootcamp.TokenIssueFlowInitiatorPayload(
-            network.parties[1].corda.api.network.nodes.self.legalIdentities[0], 10
+            10, network.parties[1].corda.api.network.nodes.self.legalIdentities[0]
         )
         Main.load(network.parties[0].corda.service).flows.tokenIssueFlowInitiator
             .start(generatedBootcampTokenIssueFlowInitiatorPayload).apply { println(this) }

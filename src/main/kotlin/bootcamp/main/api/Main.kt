@@ -1,25 +1,28 @@
 package bootcamp.main.api
 
-import org.web3j.corda.api.CorDapp
-import org.web3j.corda.api.Flow
-import org.web3j.corda.dapps.LifeCycle
-import org.web3j.corda.protocol.ClientBuilder
-import org.web3j.corda.protocol.CordaException
-import org.web3j.corda.protocol.CordaService
+import generated.bootcamp.TokenIssueFlowInitiatorPayload
+import generated.examples.ArtTransferFlowInitiatorPayload
 import javax.annotation.Generated
 import javax.ws.rs.Consumes
 import javax.ws.rs.POST
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
+import org.web3j.corda.api.CorDapp
+import org.web3j.corda.api.Flow
+import org.web3j.corda.dapps.LifeCycle
+import org.web3j.corda.model.core.transactions.SignedTransaction
+import org.web3j.corda.protocol.ClientBuilder
+import org.web3j.corda.protocol.CordaException
+import org.web3j.corda.protocol.CordaService
 
 /**
  *  CorDapp wrapper.
  */
 @Generated(
     value = ["org.web3j.corda.codegen.CorDappClientGenerator"],
-    date = "2019-12-10T14:50:58.71Z"
+    date = "2019-12-13T11:30:04.71Z"
 )
-@Path("/api/rest/cordapps/main/")
+@Path("/api/rest/cordapps/bootcamp-cordapp.jar/")
 interface Main : CorDapp {
 
     @get:Path("flows")
